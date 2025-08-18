@@ -43,9 +43,10 @@ app.get('/get/:id', (req, res) => {
 })
 
 app.post('/add', (req, res) => {
+    const id = Math.floor(Math.random() * 1000)
     const newBook = {
-        id: books.length + 1,
-        title: `Book ${books.length + 1}`
+        id: id,
+        title: `Book ${id}`
     }
     books.push(newBook)
     res.status(200).json({
@@ -70,7 +71,20 @@ app.put("/update/:id", (req, res) => {
     }
 })
 
-
+app.delete('/delete/:id', (req, res) => {
+    const findIndexOfCurrentBook = books.find(book => book.id === req.params.id)
+    if (findIndexOfCurrentBook) {
+        const deletedBook = books.splice(findIndexOfCurrentBook, 1)
+        res.status(200).json({
+            message: 'Book deleted successfully',
+            data: deletedBook[0]
+        })
+    } else {
+        res.status(404).json({
+            message: 'Book not found.'
+        })
+    }
+})
 
 const PORT = 3000
 app.listen(PORT, () => {
