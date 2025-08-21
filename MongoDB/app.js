@@ -74,7 +74,7 @@ async function runQueryExamples() {
 
         // veri silme
         // const deletedUSer = await user.findByIdAndDelete('68a42b65d19f15c1ad784cfc')
-        // console.log(deletedUSer)
+         // console.log(deletedUSer)
  
         // veri güncelleme
         const updatedUser = await user.findByIdAndUpdate('68a42d507bc562d12881f01c',{
