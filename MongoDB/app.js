@@ -76,7 +76,7 @@ async function runQueryExamples() {
         // const deletedUSer = await user.findByIdAndDelete('68a42b65d19f15c1ad784cfc')
         // console.log(deletedUSer)
  
-        // veri güncelleme
+         // veri güncelleme
         const updatedUser = await user.findByIdAndUpdate('68a42d507bc562d12881f01c',{
             $set:{age: 18}, $push: {tags: 'updated'}
         },{new: true}) // new: true' nun amacı biz bu güncelleme sırasında updatedUser değişkeni var ya ona verinin güncellenmiş halini yükler. bunu eklemezsek verinin eski halini döner
