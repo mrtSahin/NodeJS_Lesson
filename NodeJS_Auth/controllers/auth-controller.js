@@ -1,5 +1,5 @@
 const User = require('../models/User')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 // register controller
@@ -60,16 +60,17 @@ const loginUser = async (req, res) => {
     try {
         const { username, password } = req.body
         // kullanıcı veritabanında mevcut mu değil mi bakıyoz
-        const user = User.findOne({ username })
+        const user = await User.findOne({ username })
 
         if (!user) {
             return res.status(400).json({
                 success: false,
-                message: 'Invalid credentials'
+                message: "User does'nt exist!"
             })
         }
 
         // şifre doğru mu bakıyoz
+        // console.log("password", user._id)
         const isPasswordMatch = await bcrypt.compare(password, user.password)
         if (!isPasswordMatch) {
             return res.status(400).json({
@@ -91,6 +92,11 @@ const loginUser = async (req, res) => {
             }
         )
 
+        res.status(200).json({
+            success: true,
+            message: 'Logged in successfully',
+            accessToken
+        })
 
 
     } catch (e) {
